@@ -81,7 +81,7 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <h1>Adivina el número oculto del 1 al 100.</h1>
+        <h1 className="titulo">Adivina el número oculto del 1 al 100.</h1>
         <div className="containerNumero">
           <div className="containerNumero-container">
             <p className="containerNumero-numero">{numeroRandom}</p>
