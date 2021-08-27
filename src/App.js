@@ -48,8 +48,6 @@ class App extends React.Component {
       numeroUsuario,
     ];
 
-    console.log(numerosIngresados);
-
     if (numeroUsuario === numeroRandom) {
       this.setState({
         gano: true,
@@ -124,7 +122,7 @@ class App extends React.Component {
         <div className="conatinerNumerosIngresados">
           {numerosAgregadosUsuario.length > 0 && (
             <div>
-              <p>Nuneros Agregados:</p>
+              <p>Números Agregados:</p>
               <p className="conatinerNumerosIngresados-numero">
                 {numerosAgregadosUsuario.join(", ")}.
               </p>
