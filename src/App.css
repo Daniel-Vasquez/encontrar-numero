@@ -99,6 +99,14 @@
   color: #e91e63;
 }
 
+.conatinerNumerosIngresados {
+  display: flex;
+}
+
+.conatinerNumerosIngresados-numero {
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 600px) {
   .container {
     border: none;

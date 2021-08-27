@@ -43,12 +43,20 @@ class App extends React.Component {
   handleClick = () => {
     const { vidas, numeroRandom, numeroUsuario } = this.state;
 
+    const numerosIngresados = [
+      ...this.state.numerosAgregadosUsuario,
+      numeroUsuario,
+    ];
+
+    console.log(numerosIngresados);
+
     if (numeroUsuario === numeroRandom) {
       this.setState({
         gano: true,
         numeroUsuario: "",
         mensaje: "",
         warning: "",
+        numerosAgregadosUsuario: numerosIngresados,
       });
     } else if (numeroUsuario > numeroRandom) {
       this.setState({
@@ -56,6 +64,7 @@ class App extends React.Component {
         numeroUsuario: "",
         mensaje: `El número a encontrar es menor a ${numeroUsuario}`,
         warning: "",
+        numerosAgregadosUsuario: numerosIngresados,
       });
     } else if (numeroUsuario < numeroRandom) {
       this.setState({
@@ -63,6 +72,7 @@ class App extends React.Component {
         numeroUsuario: "",
         mensaje: `El número a encontrar es mayor a ${numeroUsuario}`,
         warning: "",
+        numerosAgregadosUsuario: numerosIngresados,
       });
     } else if (vidas === 0) {
       this.initGame();
@@ -75,8 +85,15 @@ class App extends React.Component {
   };
 
   render() {
-    const { vidas, mensaje, gano, numeroRandom, numeroUsuario, warning } =
-      this.state;
+    const {
+      vidas,
+      mensaje,
+      gano,
+      numeroRandom,
+      numeroUsuario,
+      warning,
+      numerosAgregadosUsuario,
+    } = this.state;
 
     return (
       <div className="container">
@@ -104,6 +121,16 @@ class App extends React.Component {
         <p className="conatinerMessage animate__animated animate__flash animate__slow animate__repeat-3">
           <strong>{mensaje}</strong>
         </p>
+        <div className="conatinerNumerosIngresados">
+          {numerosAgregadosUsuario.length > 0 && (
+            <div>
+              <p>Nuneros Agregados:</p>
+              <p className="conatinerNumerosIngresados-numero">
+                {numerosAgregadosUsuario.join(", ")}.
+              </p>
+            </div>
+          )}
+        </div>
         {!gano && vidas > 0 && (
           <button
             className="containerNumero-button"
