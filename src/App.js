@@ -1,4 +1,6 @@
 import React from "react";
+import ButtonReset from "./component/ButtonReset";
+import GetRandomArbitrary from "./utils/RandomNumber";
 import "./App.css";
 
 const INITIAL_STATE = () => {
@@ -20,18 +22,15 @@ class App extends React.Component {
     this.state = INITIAL_STATE();
   }
 
-  GetRandomArbitrary = (min, max) =>
-    parseInt(Math.random() * (max - min) + min);
-
   componentDidMount() {
     this.initGame();
   }
 
   handleChange = (currentValue) => {
     const value = parseInt(currentValue) || "";
-    if (value >= 1 && value <= 100) {
+    if (value >= 0 && value <= 100) {
       this.setState({
-        numeroUsuario: value, //Guardamos el número del usuario.
+        numeroUsuario: value,
         warning: "",
       });
     } else {
@@ -55,14 +54,14 @@ class App extends React.Component {
       this.setState({
         vidas: vidas - 1,
         numeroUsuario: "",
-        mensaje: "El número es menor",
+        mensaje: `El número a encontrar es menor a ${numeroUsuario}`,
         warning: "",
       });
     } else if (numeroUsuario < numeroRandom) {
       this.setState({
         vidas: vidas - 1,
         numeroUsuario: "",
-        mensaje: "El número es mayor",
+        mensaje: `El número a encontrar es mayor a ${numeroUsuario}`,
         warning: "",
       });
     } else if (vidas === 0) {
@@ -71,7 +70,7 @@ class App extends React.Component {
   };
 
   initGame = () => {
-    const numeroRandom = this.GetRandomArbitrary(1, 100);
+    const numeroRandom = GetRandomArbitrary(1, 100);
     this.setState({ ...INITIAL_STATE(), numeroRandom });
   };
 
@@ -88,11 +87,12 @@ class App extends React.Component {
           </div>
           <div className="containerNumero-box">Ver número</div>
         </div>
-        <p>Vidas:</p>
-        <p>{vidas}</p>
+        <p className="containerVidas">Vidas:</p>
+        <p className="containerVidas-vidas">{vidas}</p>
         <input
           className="containerNumero-input"
           type="number"
+          placeholder="Ingresa un número"
           value={numeroUsuario}
           max={100}
           min={1}
@@ -101,8 +101,8 @@ class App extends React.Component {
           }}
         />
         {warning && <p>{warning}</p>}
-        <p className="animate__animated animate__flash animate__slow animate__infinite">
-          {mensaje}
+        <p className="conatinerMessage animate__animated animate__flash animate__slow animate__repeat-3">
+          <strong>{mensaje}</strong>
         </p>
         {!gano && vidas > 0 && (
           <button
@@ -116,19 +116,13 @@ class App extends React.Component {
             Intentar
           </button>
         )}
-        {!gano && vidas === 0 && (
-          <button className="buttonReset" onClick={() => this.initGame()}>
-            Reintentar
-          </button>
-        )}
+        {!gano && vidas === 0 && <ButtonReset resetGame={this.initGame} />}
         {gano && (
           <div className="containerButtonReset">
-            <p className="animate__animated animate__zoomInDown animate__slow animate__infinite usuarioGano">
+            <p className="animate__animated animate__flash animate__slow animate__infinite usuarioGano">
               Ganaste
             </p>
-            <button className="buttonReset" onClick={() => this.initGame()}>
-              Reintentar
-            </button>
+            <ButtonReset resetGame={this.initGame} />
           </div>
         )}
       </div>
