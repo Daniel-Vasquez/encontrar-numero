@@ -31,7 +31,9 @@
 .titulo,
 .containerVidas,
 .containerVidas-vidas,
-.conatinerMessage {
+.conatinerMessage,
+.conatinerNumerosIngresados-text,
+.conatinerNumerosIngresados-numero {
   user-select: none;
 }
 
@@ -50,12 +52,12 @@
   background-color: black;
   color: white;
   position: absolute;
-  transition: all 0.3s;
+  transition: all 1.2s;
   user-select: none;
 }
 
 .containerNumero-input {
-  width: 130px;
+  width: 145px;
   outline: none;
   border-top: none;
   border-right: none;
@@ -77,8 +79,9 @@
   transition: all 0.3s;
 }
 
-.containerNumero:hover .containerNumero-box {
-  transform: translateX(100px);
+.gano.containerNumero-box {
+  background-color: transparent;
+  color: transparent;
 }
 
 .containerButtonReset {
@@ -97,6 +100,7 @@
   font-weight: 900;
   margin: 0;
   color: #e91e63;
+  user-select: none;
 }
 
 .conatinerNumerosIngresados {
@@ -119,3 +123,12 @@
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .container {
+    justify-content: center;
+    padding: 0 10px 35px;
+  }
+
+}
+

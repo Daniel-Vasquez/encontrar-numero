@@ -92,7 +92,7 @@ class App extends React.Component {
       warning,
       numerosAgregadosUsuario,
     } = this.state;
-
+    
     return (
       <div className="container">
         <h1 className="titulo">Adivina el número oculto del 1 al 100.</h1>
@@ -100,7 +100,7 @@ class App extends React.Component {
           <div className="containerNumero-container">
             <p className="containerNumero-numero">{numeroRandom}</p>
           </div>
-          <div className="containerNumero-box">Ver número</div>
+          <div className={`containerNumero-box ${gano && "gano"}`} >Número secreto</div>
         </div>
         <p className="containerVidas">Vidas:</p>
         <p className="containerVidas-vidas">{vidas}</p>
@@ -122,7 +122,7 @@ class App extends React.Component {
         <div className="conatinerNumerosIngresados">
           {numerosAgregadosUsuario.length > 0 && (
             <div>
-              <p>Números Agregados:</p>
+              <p className="conatinerNumerosIngresados-text">Números Agregados:</p>
               <p className="conatinerNumerosIngresados-numero">
                 {numerosAgregadosUsuario.join(", ")}.
               </p>
